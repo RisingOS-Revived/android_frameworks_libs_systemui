@@ -371,7 +371,11 @@ public class BaseIconFactory implements AutoCloseable {
                     new ColorDrawable(mWrapperBackgroundColor), foreground);
             dr.setBounds(0, 0, 1, 1);
             float scale = new IconNormalizer(mIconBitmapSize).getScale(icon);
-            foreground.setDrawable(createScaledDrawable(icon, scale * LEGACY_ICON_SCALE));
+            if ((icon.getChangingConfigurations() & CONFIG_HINT_NO_WRAP) == 0) {
+                foreground.setDrawable(createScaledDrawable(icon, scale * LEGACY_ICON_SCALE));
+            } else {
+                foreground.setDrawable(createScaledDrawable(icon, 1 - getExtraInsetFraction()));
+            }
             return dr;
         }
     }
