@@ -93,10 +93,7 @@ class MonoIconThemeController(
         if (mono != null) {
             return ClippedMonoDrawable(mono, shapePath, iconScale)
         }
-        if (Flags.forceMonochromeAppIcons() && shouldForceThemeIcon && !isFileDrawable) {
-            return MonochromeIconFactory(info.icon.width).wrap(base, shapePath, iconScale)
-        }
-        return null
+        return MonochromeIconFactory(info.icon.width).wrap(base, shapePath, iconScale)
     }
 
     override fun decode(
